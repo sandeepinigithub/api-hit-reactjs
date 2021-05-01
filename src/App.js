@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
-// const jobAPI = "https://ai-recruiter.herokuapp.com/api/job/index/JOB_0x1";
-const jobAPI = "https://api.github.com/users/sandeepinigithub";
+const jobAPI = "/api/hr/index/HR_0x1";
 
 function App() {
-  const [t, setT] = useState({});
+  const [data, setData] = useState({});
   useEffect(() => {
     getJobDetails();
-  });
+  }, []);
 
+  
   const getJobDetails = async () => {
     const response = await fetch(jobAPI);
+    console.log("response", response)
     const jsonData = await response.json();
-    setT(jsonData);
-    console.log(t);
+    console.log("jsonData", )
+    setData(jsonData.data);
   };
 
   return (
@@ -23,10 +24,9 @@ function App() {
         <h2>AI Recruiter Data</h2>
       </header>
       <div className="user-container">
-        <h5 className="info-item">{t.name}</h5>
-        <h5 className="info-item">{t.location}</h5>
-        <h5 className="info-item">{t.blog}</h5>
-        <h5 className="info-item">{t.company}</h5>
+        <h5 className="info-item">{data.name}</h5>
+        <h5 className="info-item">{data.email}</h5>
+        <h5 className="info-item">{data.company}</h5>
       </div>
     </div>
   );
